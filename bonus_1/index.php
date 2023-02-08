@@ -5,20 +5,32 @@
         //Attributi d'istanza
         public $title;
         public $year;
-        public $genre;
+        public $genres;
 
         //COSTRUTTORE
-        public function __construct($title, $year, Genre $genre)
+        public function __construct($title, $year, $genres)
         {
             $this->title = $title;
             $this->year = $year;
-            $this->genre = $genre;            
+            $this->genres = $genres;            
         }
 
         //METODO STAMPA INFORMAZIONI DELLA CLASSE MOVIE
         public function getMovieInfo()
         {
-            return $this->title." - ".$this->year." - ".$this->genre->name;
+            return $this->title." - ".$this->year." - ".$this->show_genres();
+        }
+
+        public function show_genres()
+        {
+            $genres = $this->genres;
+            $genres_string = "";
+            
+            foreach($genres as $genre){
+                $genres_string .= $genre->name." ";
+            }
+
+            return $genres_string;
         }
     }
 
@@ -58,15 +70,20 @@
                         $fantasy = new Genre ("Fantasy");
                         $fantascienza = new Genre ("Fantascienza");
 
-                        //Creazione instaze dei film
-                        $harrypotter1 = new Movie ("Harry potter e la pietra filosofale", "2001", $fantasy);
-                        $harrypotter2 = new Movie ("Harry potter e la camera dei segreti", "2002", $fantascienza);
-                        $harrypotter3 = new Movie ("Harry potter e il prigioniero di Azkabanm", "2004", $fantasy);
-                        $harrypotter4 = new Movie ("Harry potter e il calice di fuoco", "2005", $fantascienza);
-                        $harrypotter5 = new Movie ("Harry potter e l'ordine della fenice", "2007", $fantasy);
-                        $harrypotter6 = new Movie ("Harry potter e il principe mezzo-sangue", "2009", $fantascienza);
-                        $harrypotter7parte1 = new Movie ("Harry potter e i doni della morte: Parte 1", "2010", $fantasy);
-                        $harrypotter7parte2 = new Movie ("Harry potter e i doni della morte: Parte 2", "2011", $fantascienza);
+                        //BONUS 1 Creare un array con i generi
+                        $genres = [
+                            $fantasy,
+                            $fantascienza
+                        ];
+
+                        $harrypotter1 = new Movie ("Harry potter e la pietra filosofale", "2001", $genres);
+                        $harrypotter2 = new Movie ("Harry potter e la camera dei segreti", "2002", $genres);
+                        $harrypotter3 = new Movie ("Harry potter e il prigioniero di Azkabanm", "2004", $genres);
+                        $harrypotter4 = new Movie ("Harry potter e il calice di fuoco", "2005", $genres);
+                        $harrypotter5 = new Movie ("Harry potter e l'ordine della fenice", "2007", $genres);
+                        $harrypotter6 = new Movie ("Harry potter e il principe mezzo-sangue", "2009", $genres);
+                        $harrypotter7parte1 = new Movie ("Harry potter e i doni della morte: Parte 1", "2010", $genres);
+                        $harrypotter7parte2 = new Movie ("Harry potter e i doni della morte: Parte 2", "2011", $genres);
 
                         //Print a schermo
                         echo $harrypotter1->getMovieInfo();
